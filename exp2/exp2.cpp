@@ -2,7 +2,7 @@
 using namespace std;
 int main()
 {
-    cout << "Hello Python!\n";
+    cout << "Python is the best language in the world!\n";
 	return 0;
 }
 
