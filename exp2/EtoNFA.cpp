@@ -13,6 +13,7 @@ vector<char> Addoperator(string e);	// 在中缀表达式中加入连接运算符.
 NFA ExpToNFA(vector<char>Exp);	// 将加工后的中缀表达式转换为NFA
 // 辅助函数
 NFA Basic(char c);	// 基础运算R=a
+void AddEdge(int start, int end, char c);	// 用c作为转移条件加边
 NFA Concatenation(NFA N1, NFA N2);	// 连接运算N1.N2
 NFA Closure(NFA N);	// 闭包运算N*
 NFA OR(NFA N1, NFA N2);	// 或运算N1|N2
@@ -88,7 +89,11 @@ NFA ExpToNFA(vector<char>exp) {
 }
 
 NFA Concatenation(NFA N1, NFA N2) {
-	// 连接运算N1.N2
+	// 连接运算N1.N2（首尾连接）
+	NFA ans; Edge tempe;
+	ans.start = N1.start;
+	ans.end = N2.end;
+	tempe.info = '\0';
 	;
 }
 NFA Closure(NFA N) {
@@ -101,16 +106,14 @@ NFA OR(NFA N1, NFA N2) {
 }
 NFA Basic(char c) {
 	// 基础运算R=a
-	NFA n; NFANode S, E;Edge edge;
-	S.firstarc = &edge;	// 加边
-	edge.NodeIndex = status + 1;
-	edge.info = 'c';
+	NFA n; NFANode S, E;
+	// 初始化NFA
+	n.start = status;
+	n.end = status + 1;
 	// 将结点存入列表
 	NodeList.push_back(S);
 	NodeList.push_back(E);
-	// 初始化NFA
-	n.start = status;
-	n.end = status+1;
+	AddEdge(n.start,n.end,c);	// 以c为转移条件加边
 	// 更新status编号
 	status = status + 2;
 	return n;
@@ -128,4 +131,14 @@ NFA Calculate(NFA N1, char op, NFA N2) {
 	// 按运算符op计算结果NFA
 	if (op == '.')return Concatenation(N1, N2);
 	if (op == '|')return OR(N1,N2);
+}
+void AddEdge(int start, int end, char c) {
+	// 用c作为转移条件在start与end间加边
+	Edge tempe; tempe.info = c;
+	tempe.NodeIndex = end; 
+	tempe.nextedge = NULL;
+	Edge *p = NodeList[start].firstedge;
+	// 遍历到表尾，在后面接上边【未完工】
+	while (p->nextedge) p = p->nextedge;	
+
 }

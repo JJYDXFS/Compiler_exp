@@ -3,7 +3,7 @@
 typedef int NType;
 typedef char InfoType;
 typedef struct Edge {	// 边
-	int NodeIndex;	// 顶点下标
+	int NodeIndex;	// 终点下标
 	struct Edge *nextedge;	// 下一条邻边
 	InfoType info;	// 转移条件，即读取的字符
 }ArcNode;
