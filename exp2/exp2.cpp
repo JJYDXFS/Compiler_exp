@@ -5,14 +5,14 @@
 	{
 		case'+':
 		{
-			if (b == '+' || b == '-' || b == ')' || b == '#')
+			if (b == '+' || b == '-' || b == ')' )
 				return '>';
 			else return '<';
 			break;
 		}
 		case'-':
 		{
-			if (b == '+' || b == '-' || b == ')' || b == '#')
+			if (b == '+' || b == '-' || b == ')' )
 				return '>';
 			else return '<';
 			break;
@@ -41,13 +41,6 @@
 		case')':
 		{
 			return '>';
-			break;
-		}
-		case'#':
-		{
-			if (b == '#')
-				return '=';
-			else return '<';
 			break;
 		}
 	}
