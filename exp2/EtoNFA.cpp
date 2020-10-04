@@ -6,7 +6,6 @@ using namespace std;
 // 将空边的符号定义为'\0'
 // 变量
 vector<NFANode> NodeList;	// 保存所有图顶点
-vector<Edge> EdgeList;	// 保存所有边
 int status = 0;	// 结点编号
 // 主要函数
 vector<char> Addoperator(string e);	// 在中缀表达式中加入连接运算符.
@@ -33,11 +32,9 @@ int main()
 	//	cout << endl;
 	//}
 	// NFA MyNFA = ExpToNFA(Addoperator(e));
-	while (1) {
-		string e;
-		cin >> e;
-		Verify(ExpToNFA(Addoperator(e)));
-	}
+	string e;
+	cin >> e;
+	Verify(ExpToNFA(Addoperator(e)));
 	
 
 	return 0;
@@ -209,7 +206,6 @@ void AddEdge(int start, int end, char c) {
 	Edge *tempe=new Edge(); 
 	tempe->info = c;
 	tempe->NodeIndex = end; 
-	EdgeList.push_back(*tempe);
 	Edge *p = NodeList[start].firstedge;
 	// 遍历到单链表表尾
 	if (!p) // 没有邻边	

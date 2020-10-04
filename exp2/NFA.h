@@ -18,7 +18,7 @@ public:
 		nextedge = NULL;
 		info = '\0';
 	}
-	Edge(const Edge &E) {	// 拷贝构造函数
+	Edge(const Edge &E) {	// 拷贝构造函数，已不需要，暂时保留
 		NodeIndex = E.NodeIndex;
 		nextedge = E.nextedge;
 		info = E.info;
