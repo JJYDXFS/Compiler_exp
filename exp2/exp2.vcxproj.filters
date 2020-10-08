@@ -24,6 +24,9 @@
     <ClCompile Include="NFA.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="checkInputPlus.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NFA.h">

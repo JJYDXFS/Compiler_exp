@@ -152,6 +152,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="checkInputPlus.cpp" />
     <ClCompile Include="EtoNFA.cpp" />
     <ClCompile Include="exp2.cpp" />
     <ClCompile Include="NFA.cpp" />
