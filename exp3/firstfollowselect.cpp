@@ -23,22 +23,26 @@ int main() {
 }
 */
 
+/*
 int main()
 {
+	system("color 70");
+
 	InputGrammar();
 	VerifyGrammar(G);
-
+	
 	cout << "所有First集信息：" << endl;
 	getAllFirst();
 	cout << "所有Follow集信息：" << endl;
 	getAllFollow();
 	cout << "所有Select集信息：" << endl;
 	getAllSelect();
+	
 
-	GetInput();
-	return 0;
+GetSent();
+return 0;
 }
-
+*/
 
 void InputGrammar()
 {
@@ -300,15 +304,14 @@ bool isTerminal(char var) {
 }
 
 
-void GetInput() {	// 调试程序
-	CreateM();
+void GetSent() {	// 调试程序
+	map<pair<char, char>, string> M = CreateM();	// 预测分析表
 	do {
-		string str;
+		string sent;
 		cout << "请输入需要分析的字符串：" << endl;
-		cin >> str;
+		cin >> sent;
 		vector<pair<char, string>> Derivation;	// 产生式列表
-		bool flag = PredictiveAnalysis(str, Derivation);
-		if (flag) {
+		if (IsLegalSent(sent, M, Derivation)) {
 			cout << "字符串属于该文法产生的句子！产生过程如下：" << endl;
 			string temp = Derivation[0].second;
 			cout << start <<"->"<< temp << endl;
@@ -327,7 +330,8 @@ void GetInput() {	// 调试程序
 	} while (true);
 }
 
-void CreateM() {	// 创建预测分析表
+map<pair<char, char>, string> CreateM() {	// 创建预测分析表
+	map<pair<char, char>, string> M ;	// 预测分析表
 	for (int i = 0; i < G.size(); i++)
 	{
 		set<char> selectSet = Select(G[i].left, G[i].right);	// 获取规则对应的Select集
@@ -335,20 +339,20 @@ void CreateM() {	// 创建预测分析表
 		for (it = selectSet.begin(); it != selectSet.end(); it++)
 			M[make_pair(G[i].left, *it)] = G[i].right;
 	}
+	return M;
 }
 
-bool PredictiveAnalysis(string & input, vector<pair<char, string>> & Derivation) {	// 预测分析
+bool IsLegalSent(string & sent, map<pair<char, char>, string> M, vector<pair<char, string>> & Derivation) {	// 预测分析
 	stack<char>buffer, done;	// buffer:输入缓冲栈；done:展开式栈
 	buffer.push('#'); done.push('#'); done.push(start);
 
-	for (int i = input.length() - 1; i >= 0; i--)
-		buffer.push(input[i]);	// 输入字符入栈
+	for (int i = sent.length() - 1; i >= 0; i--)
+		buffer.push(sent[i]);	// 输入字符入栈
 
 	char in = buffer.top();	// 当前待匹配的输入字符
 	char X = done.top();	// 当前展开的字符
 
 	while (X != '#') {	// 未到输入结尾时
-		// 是否需要输出中间变量用于可视化
 		map<pair<char, char>, string>::iterator p;
 		p = M.find(make_pair(X, in));	// 查找对应产生式
 
@@ -360,16 +364,14 @@ bool PredictiveAnalysis(string & input, vector<pair<char, string>> & Derivation)
 		else if (p == M.end()) return false;
 		else {
 			done.pop();
-			if (p->second == "@") {
-				Derivation.push_back(make_pair(X, p->second));	// 收集产生式
-				X = done.top();
-				continue;
+			if (p->second != "@") {
+				for (int i = p->second.length() - 1; i >= 0; i--)
+					done.push(p->second[i]);	// 产生式各字符倒序入栈
 			}
-			for (int i = p->second.length() - 1; i >= 0; i--)
-				done.push(p->second[i]);	// 产生式各字符倒序入栈
 			Derivation.push_back(make_pair(X, p->second));	// 收集产生式
 		}
 		X = done.top();
 	}
 	return true;
 }
+

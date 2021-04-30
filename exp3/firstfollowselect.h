@@ -43,10 +43,8 @@ set<char> Select(char c, string s);
 set<char> delElement(set<char> s, char c);//删除集合s中的字符c
 set<char> temp;//用于求Follow集时暂存可能导致自循环的非终结符
 
-map<pair<char, char>, string> M;	// 预测分析表
-
-void GetInput();	// 调试程序
-void CreateM();	// 创建预测分析表
-bool PredictiveAnalysis(string & input, vector<pair<char, string>> & Derivation);	// 预测分析
+void GetSent();	// 调试程序
+map<pair<char, char>, string> CreateM();	// 创建预测分析表
+bool IsLegalSent(string & sent, map<pair<char, char>, string> M, vector<pair<char, string>> & Derivation);	// 预测分析
 
 #endif // !firstfollowselect.h
