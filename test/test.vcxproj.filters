@@ -15,22 +15,11 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="exp2.cpp">
+    <ClCompile Include="test.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="EtoNFA.cpp">
+    <ClCompile Include="..\exp3\源.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="NFA.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="checkInputPlus.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="NFA.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

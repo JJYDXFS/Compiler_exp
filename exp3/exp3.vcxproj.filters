@@ -15,21 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="exp2.cpp">
+    <ClCompile Include="PredictiveAnalysis.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="EtoNFA.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="NFA.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="checkInputPlus.cpp">
+    <ClCompile Include="firstfollowselect.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NFA.h">
+    <ClInclude Include="firstfollowselect.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
